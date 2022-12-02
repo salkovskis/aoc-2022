@@ -1,12 +1,12 @@
 use std::fs;
 
-const ROCK_OPPONENT: &str = "A";
-const PAPER_OPPONENT: &str = "B";
-const SCISSORS_OPPONENT: &str = "C";
+const OPPONENT_ROCK: &str = "A";
+const OPPONENT_PAPER: &str = "B";
+const OPPONENT_SCISSORS: &str = "C";
 
-const ROCK_SELF: &str = "X";
-const PAPER_SELF: &str = "Y";
-const SCISSORS_SELF: &str = "Z";
+const SELF_ROCK: &str = "X";
+const SELF_PAPER: &str = "Y";
+const SELF_SCISSORS: &str = "Z";
 
 const SCORE_ROCK: u32 = 1;
 const SCORE_PAPER: u32 = 2;
@@ -24,40 +24,40 @@ fn read_input() -> Vec<String> {
 
 fn get_score_for_move(player_move: &str) -> Result<u32, &str> {
     match player_move {
-        ROCK_SELF => Ok(SCORE_ROCK),
-        PAPER_SELF => Ok(SCORE_PAPER),
-        SCISSORS_SELF => Ok(SCORE_SCISSORS),
+        SELF_ROCK => Ok(SCORE_ROCK),
+        SELF_PAPER => Ok(SCORE_PAPER),
+        SELF_SCISSORS => Ok(SCORE_SCISSORS),
         _ => Err("Illegal move"),
     }
 }
 
 fn get_round_score(player_move: &str, opponent_move: &str) -> Result<u32, &'static str> {
     match player_move {
-        ROCK_SELF => {
+        SELF_ROCK => {
             return match opponent_move {
-                PAPER_OPPONENT => Ok(0),
-                ROCK_OPPONENT => Ok(3),
-                SCISSORS_OPPONENT => Ok(6),
+                OPPONENT_PAPER => Ok(0),
+                OPPONENT_ROCK => Ok(3),
+                OPPONENT_SCISSORS => Ok(6),
 
                 _ => Err("Illegal Opponent move"),
             };
         }
 
-        PAPER_SELF => {
+        SELF_PAPER => {
             return match opponent_move {
-                SCISSORS_OPPONENT => Ok(0),
-                ROCK_OPPONENT => Ok(6),
-                PAPER_OPPONENT => Ok(3),
+                OPPONENT_SCISSORS => Ok(0),
+                OPPONENT_ROCK => Ok(6),
+                OPPONENT_PAPER => Ok(3),
 
                 _ => Err("Illegal Opponent move"),
             };
         }
 
-        SCISSORS_SELF => {
+        SELF_SCISSORS => {
             return match opponent_move {
-                ROCK_OPPONENT => Ok(0),
-                SCISSORS_OPPONENT => Ok(3),
-                PAPER_OPPONENT => Ok(6),
+                OPPONENT_ROCK => Ok(0),
+                OPPONENT_SCISSORS => Ok(3),
+                OPPONENT_PAPER => Ok(6),
 
                 _ => Err("Illegal Opponent move"),
             };
@@ -127,9 +127,9 @@ fn get_player_move_score_for_scenario(opponent_move: &str, game_scenario: &str) 
     match game_scenario {
         SCENARIO_LOSE => {
             match opponent_move {
-                ROCK_OPPONENT => Ok(SCORE_SCISSORS),
-                PAPER_OPPONENT => Ok(SCORE_ROCK),
-                SCISSORS_OPPONENT => Ok(SCORE_PAPER),
+                OPPONENT_ROCK => Ok(SCORE_SCISSORS),
+                OPPONENT_PAPER => Ok(SCORE_ROCK),
+                OPPONENT_SCISSORS => Ok(SCORE_PAPER),
 
                 _ => Err("Illegal opponent move")
             }
@@ -137,9 +137,9 @@ fn get_player_move_score_for_scenario(opponent_move: &str, game_scenario: &str) 
 
         SCENARIO_DRAW => {
             match opponent_move {
-                ROCK_OPPONENT => Ok(SCORE_ROCK),
-                PAPER_OPPONENT => Ok(SCORE_PAPER),
-                SCISSORS_OPPONENT => Ok(SCORE_SCISSORS),
+                OPPONENT_ROCK => Ok(SCORE_ROCK),
+                OPPONENT_PAPER => Ok(SCORE_PAPER),
+                OPPONENT_SCISSORS => Ok(SCORE_SCISSORS),
 
                 _ => Err("Illegal opponent move")
             }
@@ -147,9 +147,9 @@ fn get_player_move_score_for_scenario(opponent_move: &str, game_scenario: &str) 
 
         SCENARIO_WIN => {
             match opponent_move {
-                ROCK_OPPONENT => Ok(SCORE_PAPER),
-                PAPER_OPPONENT => Ok(SCORE_SCISSORS),
-                SCISSORS_OPPONENT => Ok(SCORE_ROCK),
+                OPPONENT_ROCK => Ok(SCORE_PAPER),
+                OPPONENT_PAPER => Ok(SCORE_SCISSORS),
+                OPPONENT_SCISSORS => Ok(SCORE_ROCK),
 
                 _ => Err("Illegal opponent move")
             }
