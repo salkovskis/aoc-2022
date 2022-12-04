@@ -46,16 +46,3 @@ fn parse_and_sort_list(list_of_calories: Vec<String>) -> Vec<i32> {
     return list_of_elf_calories;
 }
 
-fn get_present_for(name: String) -> Option<String> {
-    if name.eq("Marta") {
-        return Some("Buča".to_string())
-    }
-
-    if name.eq("Miķelis") {
-        return Some("Mjauuu".to_string())
-    }
-
-   readline::readline(">")
-
-    None
-}
